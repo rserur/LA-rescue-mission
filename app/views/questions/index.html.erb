@@ -1,0 +1,15 @@
+<h1>Questions</h1>
+
+<p>
+  <%= link_to 'Ask Question', new_question_path %>
+</p>
+
+<br />
+
+<ul>
+  <% @questions.each do |question| %>
+  <li>
+    <%= link_to question.title, question %>: <em> <%= question.created_at %> </em>
+  </li>
+  <% end %>
+</ul>
