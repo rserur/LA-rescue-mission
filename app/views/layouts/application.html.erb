@@ -6,31 +6,38 @@
   <%= stylesheet_link_tag 'http://cdnjs.cloudflare.com/ajax/libs/foundation/5.2.3/css/foundation.min.css' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'http://cdnjs.cloudflare.com/ajax/libs/foundation/5.2.3/js/foundation.min.js' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <div class="row">
-  <div class="large-6 columns">
+  <div class="large-5 columns">
     <h1><%= link_to 'Rescue Mission', questions_path %></h1>
   </div>
-  <div class="large-6 columns">
+  <div class="large-7 columns">
     <ul class="button-group right">
       <li><a href="<%= new_question_path %>" class="button">Ask Question</a></li>
       <li>
       <% if current_user %>
-        Welcome <%= current_user.name %>
+        <span class="button">Logged in as <%= current_user.name %></span>
       <% else %>
-        <%= link_to "Sign in with GitHub", "/auth/github" %>
+        <%= link_to "Sign in with GitHub", "/auth/github", class: "button" %>
       <% end %>
       </li>
-      <li><%= link_to "Sign Out", signout_path %></li>
+      <% if current_user %>
+      <li><%= link_to "Sign Out", signout_path, class:"button" %></li>
+      <% end %>
+
     </ul>
   </div>
 
 </div>
 <% if flash.any? %>
-  <div>
-    <%= flash[:notice] %>
+  <div class="row">
+    <div data-alert class="alert-box  info radius large-12 columns">
+      <%= flash[:notice] %>
+      <a href="#" class="close">&times;</a>
+    </div>
   </div>
 <% end %>
 <%= yield %>
