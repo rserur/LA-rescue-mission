@@ -40,3 +40,7 @@ gem 'spring',        group: :development
 
 gem 'redcarpet'
 gem 'rouge'
+
+
+gem 'omniauth'
+gem 'omniauth-github'

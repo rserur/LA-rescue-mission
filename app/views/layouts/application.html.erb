@@ -16,8 +16,14 @@
   <div class="large-6 columns">
     <ul class="button-group right">
       <li><a href="<%= new_question_path %>" class="button">Ask Question</a></li>
-      <li><a href="#" class="button">Sign In</a></li>
-      <li><a href="#" class="button">Sign Out</a></li>
+      <li>
+      <% if current_user %>
+        Welcome <%= current_user.name %>
+      <% else %>
+        <%= link_to "Sign in with GitHub", "/auth/github" %>
+      <% end %>
+      </li>
+      <li><%= link_to "Sign Out", signout_path %></li>
     </ul>
   </div>
 
