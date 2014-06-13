@@ -2,11 +2,26 @@
 <html>
 <head>
   <title>RescueMission</title>
+  <%= stylesheet_link_tag 'http://cdnjs.cloudflare.com/ajax/libs/foundation/5.2.3/css/normalize.css' %>
+  <%= stylesheet_link_tag 'http://cdnjs.cloudflare.com/ajax/libs/foundation/5.2.3/css/foundation.min.css' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="row">
+  <div class="large-6 columns">
+    <h1><%= link_to 'Rescue Mission', questions_path %></h1>
+  </div>
+  <div class="large-6 columns">
+    <ul class="button-group right">
+      <li><a href="<%= new_question_path %>" class="button">Ask Question</a></li>
+      <li><a href="#" class="button">Sign In</a></li>
+      <li><a href="#" class="button">Sign Out</a></li>
+    </ul>
+  </div>
+
+</div>
 <% if flash.any? %>
   <div>
     <%= flash[:notice] %>

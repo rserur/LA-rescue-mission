@@ -1,15 +1,27 @@
-<h1>Questions</h1>
+<div class="row">
+  <div class="large-12 columns">
+    <h3 class="subheader">Questions</h3>
+  </div>
+</div>
 
-<p>
-  <%= link_to 'Ask Question', new_question_path %>
-</p>
+<% @questions.each do |question| %>
+<div class="row panel">
+  <div class="row">
+    <div class="large-6 columns">
+      <h5><%= link_to question.title, question %></h5>
+    </div>
+    <div class="large-4 columns">
+      <em><strong>Created:</strong> <%= question.created_at.to_formatted_s(:short) %></em>
+    </div>
+    <div class="large-2 columns">
+      <a href="<%= edit_question_path(question) %>" class="button">Edit Question</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <p><%= markdown(question.description) %></p>
+    </div>
+  </div>
+</div>
+<% end %>
 
-<br />
-
-<ul>
-  <% @questions.each do |question| %>
-  <li>
-    <%= link_to question.title, question %>: <em> <%= question.created_at %> </em>
-  </li>
-  <% end %>
-</ul>

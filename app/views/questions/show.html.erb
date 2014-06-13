@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"></p>
 
 <p>
   <strong>Title:</strong>
@@ -7,8 +7,11 @@
 
 <p>
   <strong>Description:</strong>
-  <%= @question.description %>
+  <%= markdown(@question.description) %>
 </p>
+
+<%= link_to 'Edit Question', edit_question_path(@question.id) %> | <%= link_to 'Delete', question_path(@question.id),
+                    method: :delete, data: { confirm: 'Are you sure?' } %>
 
 <h2>Answer Question</h2>
 

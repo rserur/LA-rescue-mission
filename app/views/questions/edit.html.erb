@@ -1,14 +1,15 @@
 <div class="row">
   <div class="small-10 large-centered columns">
     <div class="form-actions">
-      <h1 class="subheader">Ask Question</h1>
+      <h1 class="subheader">Edit Question</h1>
+      <p>(or <%= link_to 'Delete', question_path(@question.id),
+                        method: :delete, data: { confirm: 'Are you sure?' } %>)</p>
     </div>
   </div>
 </div>
-
 <div class="row">
   <div class="small-10 large-centered columns">
-    <%= form_for(@question, html: { class: 'form-horizontal' }) do |f| %>
+    <%= form_for :question, url: question_path(@question), method: :patch do |f| %>
 
       <% if @question.errors.any? %>
         <div id="error_explanation">
