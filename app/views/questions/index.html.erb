@@ -14,7 +14,9 @@
       <em><strong>Created:</strong> <%= question.created_at.to_formatted_s(:short) %></em>
     </div>
     <div class="large-2 columns">
-      <a href="<%= edit_question_path(question) %>" class="button">Edit Question</a>
+      <% if question.user_id == session[:user_id] %>
+        <a href="<%= edit_question_path(question) %>" class="button">Edit Question</a>
+      <% end %>
     </div>
   </div>
   <div class="row">

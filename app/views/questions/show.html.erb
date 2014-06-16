@@ -1,46 +1,63 @@
 <p id="notice"></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @question.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= markdown(@question.description) %>
-</p>
-
-<%= link_to 'Edit Question', edit_question_path(@question.id) %> | <%= link_to 'Delete', question_path(@question.id),
-                    method: :delete, data: { confirm: 'Are you sure?' } %>
-
-<h2>Answer Question</h2>
-
-<%= form_for [@question, @answer] do |f| %>
-
-  <% if @answer.errors.any? %>
+<div class="row">
+  <div class="large-12 columns">
+    <h2 class="subheader">
+    <strong>Question:</strong>
+    <%= @question.title %>
+    </h2>
+    <em>Asked by <%= @question.user.name %></em>
+    <br\>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <p>
+    <strong>Description:</strong>
+    <%= markdown(@question.description) %>
+    </p>
+    <% if @question.user_id == session[:user_id] %>
+    <%= link_to 'Edit Question', edit_question_path(@question.id) %> | <%= link_to 'Delete', question_path(@question.id),
+    method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <h3>Answer Question</h3>
+    <%= form_for [@question, @answer] do |f| %>
+    <% if @answer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@answer.errors.count, "error") %> prohibited this article from being saved:</h2>
-
       <ul>
-      <% @answer.errors.full_messages.each do |msg| %>
+        <% @answer.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
-      <% end %>
+        <% end %>
       </ul>
     </div>
+    <% end %>
+    <%= f.text_area :description %><br>
+    <%= f.submit %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <h2><strong>Answers:</strong></h2>
+  </div>
+</div>
+
+  <% @question.answers.order(:created_at).each do |answer| %>
+  <div class="row">
+
+      <div class="large-12 columns panel">
+        <p>
+          <%= "#{answer.description}" %>, <em> <%= "#{answer.created_at}" %></em>
+        </p>
+      </div>
+
+  </div>
   <% end %>
-  <%= f.text_area :description %><br>
-
-  <%= f.submit %>
-<% end %>
-
 
 <%= link_to 'Back', questions_path %>
-
-<h2>Answers</h2>
-
-<% @question.answers.order(:created_at).each do |answer| %>
-  <p>
-    <%= "#{answer.description}" %>, <em> <%= "#{answer.created_at}" %></em>
-  </p>
-<% end %>
-
+</div>
+</div>

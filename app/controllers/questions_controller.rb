@@ -19,13 +19,12 @@ class QuestionsController < ApplicationController
   # POST /questions
   def create
     @question = Question.new(question_params)
-
+    @question.user_id = session[:user_id]
     if @question.save
       redirect_to @question, notice: 'Question successfully created.'
     else
       render action: 'new'
     end
-
   end
 
   def edit
@@ -40,7 +39,6 @@ class QuestionsController < ApplicationController
     else
       render action: 'edit'
     end
-
   end
 
   def destroy
